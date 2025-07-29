@@ -1,6 +1,8 @@
 package com.calc.Calculator.service;
 
+import com.calc.Calculator.bean.NumToSave;
 import com.calc.Calculator.bean.num;
+import com.calc.Calculator.entities.MemSave;
 
 public interface Calculate {
 	
@@ -14,7 +16,7 @@ public interface Calculate {
 
 	public float getAns();
 
-	public float memorySave(float num1) throws Exception;
+	public float memorySave(NumToSave numS) throws Exception;
 
-	public float memCall();
+	public MemSave memCall(String userName) throws Exception;
 }
