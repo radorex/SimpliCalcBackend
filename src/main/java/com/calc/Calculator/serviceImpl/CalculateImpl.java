@@ -5,8 +5,10 @@ import java.io.Console;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.calc.Calculator.bean.NumToSave;
 import com.calc.Calculator.bean.num;
 import com.calc.Calculator.dao.CalculateDAO;
+import com.calc.Calculator.entities.MemSave;
 import com.calc.Calculator.service.Calculate;
 import com.calc.Calculator.utilities.calcUtil;
 
@@ -74,15 +76,15 @@ public class CalculateImpl implements Calculate {
 	}
 
 	@Override
-	public float memorySave(float num1) throws Exception {
+	public float memorySave(NumToSave numS) throws Exception {
 		// TODO Auto-generated method stub
-		return calculateDAO.memorySave(num1);
+		return calculateDAO.memorySave(numS);
 	}
 
 	@Override
-	public float memCall() {
+	public MemSave memCall(String userName) throws Exception {
 		// TODO Auto-generated method stub
-		return calculateDAO.memCall();
+		return calculateDAO.memCall(userName);
 	}
 
 }
