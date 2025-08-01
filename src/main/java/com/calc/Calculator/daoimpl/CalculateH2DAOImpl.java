@@ -55,8 +55,8 @@ public class CalculateH2DAOImpl implements CalculateDAO {
 			return rs.getString(1);
 		}; 
 		try {
-			List<String> ansL = jdbcTemplate.query(query, answerList);
-			answer = Float.valueOf(ansL.get(0));
+			String ansL = jdbcTemplate.queryForObject(query, answerList);
+			answer = Float.valueOf(ansL);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -126,7 +126,7 @@ public class CalculateH2DAOImpl implements CalculateDAO {
 	@Override
 	public MemSave memCall(String userName) throws Exception {
 		// TODO Auto-generated method stub
-		List<MemSave> valList = null;
+		MemSave valList = null;
 		if(userExist(userName)) {
 			query="select val from memsave where user_id = (select user_id from users where username=?);";
 			RowMapper<MemSave> mapper = (rs, rowNum) -> {
@@ -135,12 +135,12 @@ public class CalculateH2DAOImpl implements CalculateDAO {
 				return ms;
 			};
 			try {
-				valList = jdbcTemplate.query(query, mapper, userName);
+				valList = jdbcTemplate.queryForObject(query, mapper, userName);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return valList.get(0);
+			return valList;
 			}else {
 				throw new Exception("User not found. Please register!!");
 			}
