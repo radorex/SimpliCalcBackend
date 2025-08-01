@@ -3,6 +3,7 @@ package com.calc.Calculator.serviceImpl;
 import java.io.Console;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.calc.Calculator.bean.NumToSave;
@@ -16,6 +17,7 @@ import com.calc.Calculator.utilities.calcUtil;
 public class CalculateImpl implements Calculate {
 	
 	@Autowired
+	@Qualifier("calculateH2DAOImpl")
 	CalculateDAO calculateDAO;
 	
 	private float result;
@@ -62,7 +64,14 @@ public class CalculateImpl implements Calculate {
 	
 	private void saveAns(float ans) {
 		boolean success=calcUtil.saveAnswer(ans);
-		if(success==true) {
+		boolean s1 = false;
+		try {
+			s1 = calculateDAO.saveAnswer(ans);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(success==true&&s1==true) {
 			System.out.println("Answer Saved Successfully");
 		}else {
 			System.out.println("Answer Saving Failed");

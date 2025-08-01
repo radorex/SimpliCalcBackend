@@ -5,7 +5,7 @@ import com.calc.Calculator.entities.MemSave;
 
 public interface CalculateDAO {
 
-	public boolean saveAnswer(float ans);
+	public boolean saveAnswer(float ans) throws Exception;
 
 	public float getAns();
 
